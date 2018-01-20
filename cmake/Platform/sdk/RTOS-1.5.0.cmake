@@ -117,9 +117,6 @@ endif()
 if(NOT ESPTOOL)
     set(ESPTOOL esptool.py)
 endif()
-if(NOT SERIAL_PORT)
-    set(SERIAL_PORT "/dev/ttyUSB0")
-endif()
 if(NOT APP)
     set(APP 1)
 endif()
@@ -313,7 +310,7 @@ function(esp8266_add_firmware FIRMWARE TARGET)
         " fi\n"
         "fi\n"
         "set -x\n"
-        "${PYTHON} ${ESPTOOL} --port ${SERIAL_PORT} write_flash 0 ${BOOT_NAME} ${ADDR} ${BIN_NAME} ${ESP_SYS_PARAM_ADDR} ${ESP8266_SDK_BASE}/bin/esp_init_data_default.bin ${ESP_RF_CAL_ADDR} ${ESP8266_SDK_BASE}/bin/blank.bin ${ESP_DEFAULT_ADDR} ${ESP8266_SDK_BASE}/bin/blank.bin\n"
+        "${PYTHON} ${ESPTOOL} --port $port write_flash 0 ${BOOT_NAME} ${ADDR} ${BIN_NAME} ${ESP_SYS_PARAM_ADDR} ${ESP8266_SDK_BASE}/bin/esp_init_data_default.bin ${ESP_RF_CAL_ADDR} ${ESP8266_SDK_BASE}/bin/blank.bin ${ESP_DEFAULT_ADDR} ${ESP8266_SDK_BASE}/bin/blank.bin\n"
         "set +x\n"
     )
     file(COPY "${CMAKE_BINARY_DIR}/temp/esptool.sh"
