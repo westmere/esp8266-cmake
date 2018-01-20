@@ -21,13 +21,4 @@ set_target_properties(demo PROPERTIES COMPILE_FLAGS "-DMQTT_TASK")
 esp8266_add_executable(${CMAKE_PROJECT_NAME} 
         $<TARGET_OBJECTS:demo>
 )
-esp8266_add_firmware(${CMAKE_PROJECT_NAME}_firmware ${CMAKE_PROJECT_NAME})
-
-# 
-# target_link_libraries(firmware
-#     user_code
-# )
-# 
-# set_target_properties(firmware PROPERTIES
-#     LINKER_LANGUAGE C
-# )
+esp8266_add_firmware(firmware ${CMAKE_PROJECT_NAME})
