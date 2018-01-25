@@ -145,12 +145,6 @@ function(esp8266_add_library TARGET)
         "${ESP8266_SDK_BASE}/driver_lib/driver/*.c"
     )
     add_library(${TARGET} STATIC ${driver_lib} ${ARGN})
-    target_compile_definitions(${TARGET}    PUBLIC 
-                                            ESP_RF_CAL_DEFAULT_ADDR=${ESP_RF_CAL_DEFAULT_ADDR}
-                                            ESP_RF_CAL_ADDR=${ESP_RF_CAL_ADDR}
-                                            ESP_SYS_PARAM_ADDR=${ESP_SYS_PARAM_ADDR}
-                                            ESP_APP1_ADDR=${ESP_APP1_ADDR}
-                                            ESP_APP2_ADDR=${ESP_APP2_ADDR})
     
 #     target_include_directories(${TARGET} PUBLIC
 #         "${ESP8266_SDK_BASE}/include"
