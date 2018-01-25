@@ -270,8 +270,10 @@ function(esp8266_add_firmware FIRMWARE TARGET)
     )
 
     if(${APP} STREQUAL 0)
-        add_custom_target(${FIRMWARE} DEPENDS RTOS_SDK_FIRMWARE0
+        add_custom_target(${FIRMWARE}
+                        ALL
                         VERBATIM
+                        DEPENDS RTOS_SDK_FIRMWARE0
                         COMMAND ${CMAKE_COMMAND} -E rename eagle.app.flash.bin ${BOOT_NAME}
                         COMMAND ${CMAKE_COMMAND} -E rename eagle.app.v6.irom0text.bin ${BIN_NAME}
                         COMMAND ${CMAKE_COMMAND} -E remove eagle.app.v6.*
@@ -286,8 +288,10 @@ function(esp8266_add_firmware FIRMWARE TARGET)
         else()
             set(msg "Support boot_v1.2 and +")
         endif()
-        add_custom_target(${FIRMWARE} DEPENDS RTOS_SDK_FIRMWARE0
+        add_custom_target(${FIRMWARE}
+                        ALL
                         VERBATIM
+                        DEPENDS RTOS_SDK_FIRMWARE0
                         COMMAND ${CMAKE_COMMAND} -E rename eagle.app.flash.bin ${BIN_NAME}
                         COMMAND ${CMAKE_COMMAND} -E remove eagle.app.v6.*
                         COMMAND @${CMAKE_COMMAND} -E echo ${msg}
