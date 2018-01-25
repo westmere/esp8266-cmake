@@ -10,107 +10,6 @@ include(CMakeParseArguments)
 #     message(FATAL_ERROR "Unsupported build platforom.")
 # endif()
 
-function(esp8266_add_library TARGET)
-#     cmake_parse_arguments(
-#         PARSED_ARGS # prefix of output variables
-#         "" # list of names of the boolean arguments (only defined ones will be true)
-#         "NAME" # list of names of mono-valued arguments
-#         "" # list of names of multi-valued arguments (output variables are lists)
-#         ${ARGN} # arguments of the function to parse, here we take the all original ones
-#     )
-
-    file(GLOB driver_lib
-        "${ESP8266_SDK_BASE}/driver_lib/driver/*.c"
-    )
-    add_library(${TARGET} STATIC ${driver_lib} ${ARGN})
-    
-#     target_include_directories(${TARGET} PUBLIC
-#         "${ESP8266_SDK_BASE}/include"
-#         "${ESP8266_SDK_BASE}/driver_lib/include"
-#         "${ESP8266_SDK_BASE}/include/json"
-#         "${ESP8266_SDK_BASE}/extra_include"
-#         "${ESP8266_SDK_BASE}/include/espressif"
-#         "${ESP8266_SDK_BASE}/include/lwip"
-#         "${ESP8266_SDK_BASE}/include/lwip/ipv4"
-#         "${ESP8266_SDK_BASE}/include/lwip/ipv6"
-#         "${ESP8266_SDK_BASE}/include/nopoll"
-#         "${ESP8266_SDK_BASE}/include/spiffs"
-#         "${ESP8266_SDK_BASE}/include/ssl"
-#         "${ESP8266_SDK_BASE}/include/json"
-#         "${ESP8266_SDK_BASE}/include/freertos"
-#     )
-    
-#     get_property(dirs TARGET ${TARGET} PROPERTY INCLUDE_DIRECTORIES)
-#     foreach(dir ${dirs})
-#         message(STATUS "dir='${dir}'")
-#     endforeach()
-
-    find_library(ESP8266_ARDUINO_SDK_LIB_HAL hal ${ARDUINO_ESP8266_DIR}/${ARDUINO_ESP8266_VERSION}/tools/sdk/lib)
-    find_library(ESP8266_SDK_LIB_GCC gcc ${ESP8266_SDK_BASE}/lib)
-    find_library(ESP8266_SDK_LIB_CIROM cirom ${ESP8266_SDK_BASE}/lib)
-    find_library(ESP8266_SDK_LIB_CRYPTO crypto ${ESP8266_SDK_BASE}/lib)
-    find_library(ESP8266_SDK_LIB_ESPCONN espconn ${ESP8266_SDK_BASE}/lib)
-    find_library(ESP8266_SDK_LIB_MIROM mirom ${ESP8266_SDK_BASE}/lib)
-    find_library(ESP8266_SDK_LIB_ESPNOW espnow ${ESP8266_SDK_BASE}/lib)
-    find_library(ESP8266_SDK_LIB_FREERTOS freertos ${ESP8266_SDK_BASE}/lib)
-    find_library(ESP8266_SDK_LIB_JSON json ${ESP8266_SDK_BASE}/lib)
-    find_library(ESP8266_SDK_LIB_LWIP lwip ${ESP8266_SDK_BASE}/lib)
-    find_library(ESP8266_SDK_LIB_MAIN main ${ESP8266_SDK_BASE}/lib)
-    find_library(ESP8266_SDK_LIB_MESH mesh ${ESP8266_SDK_BASE}/lib)
-    find_library(ESP8266_SDK_LIB_MINIC minic ${ESP8266_SDK_BASE}/lib)
-    find_library(ESP8266_SDK_LIB_NET80211 net80211 ${ESP8266_SDK_BASE}/lib)
-    find_library(ESP8266_SDK_LIB_NOPOLL nopoll ${ESP8266_SDK_BASE}/lib)
-    find_library(ESP8266_SDK_LIB_PHY phy ${ESP8266_SDK_BASE}/lib)
-    find_library(ESP8266_SDK_LIB_PP pp ${ESP8266_SDK_BASE}/lib)
-    find_library(ESP8266_SDK_LIB_PWM pwm ${ESP8266_SDK_BASE}/lib)
-    find_library(ESP8266_SDK_LIB_UPGRADE upgrade ${ESP8266_SDK_BASE}/lib)
-    find_library(ESP8266_SDK_LIB_SMARTCONFIG smartconfig ${ESP8266_SDK_BASE}/lib)
-    find_library(ESP8266_SDK_LIB_AIRKISS airkiss ${ESP8266_SDK_BASE}/lib)
-    find_library(ESP8266_SDK_LIB_SPIFFS spiffs ${ESP8266_SDK_BASE}/lib)
-    find_library(ESP8266_SDK_LIB_SSC ssc ${ESP8266_SDK_BASE}/lib)
-    find_library(ESP8266_SDK_LIB_SSL ssl ${ESP8266_SDK_BASE}/lib)
-    find_library(ESP8266_SDK_LIB_OPENSSL openssl ${ESP8266_SDK_BASE}/lib)
-    find_library(ESP8266_SDK_LIB_MBEDTLS mbedtls ${ESP8266_SDK_BASE}/lib)
-    find_library(ESP8266_SDK_LIB_MQTT mqtt ${ESP8266_SDK_BASE}/lib)
-    find_library(ESP8266_SDK_LIB_WPA wpa ${ESP8266_SDK_BASE}/lib)
-    find_library(ESP8266_SDK_LIB_WPS wps ${ESP8266_SDK_BASE}/lib)
-
-    target_link_libraries(${TARGET}
-#         gcc
-        -lhal
-#         ${ESP8266_ARDUINO_SDK_LIB_HAL}
-        ${ESP8266_SDK_LIB_CRYPTO}
-        ${ESP8266_SDK_LIB_ESPCONN}
-        ${ESP8266_SDK_LIB_MIROM}
-        ${ESP8266_SDK_LIB_ESPNOW}
-        ${ESP8266_SDK_LIB_FREERTOS}
-        ${ESP8266_SDK_LIB_JSON}
-        ${ESP8266_SDK_LIB_LWIP}
-        ${ESP8266_SDK_LIB_MAIN}
-#         ${ESP8266_SDK_LIB_MESH}
-        ${ESP8266_SDK_LIB_MINIC}
-        ${ESP8266_SDK_LIB_NET80211}
-        ${ESP8266_SDK_LIB_NOPOLL}
-        ${ESP8266_SDK_LIB_PHY}
-        ${ESP8266_SDK_LIB_PP}
-        ${ESP8266_SDK_LIB_PWM}
-#         ${ESP8266_SDK_LIB_UPGRADE}
-        ${ESP8266_SDK_LIB_SMARTCONFIG}
-        ${ESP8266_SDK_LIB_AIRKISS}
-        ${ESP8266_SDK_LIB_SPIFFS}
-        ${ESP8266_SDK_LIB_SSC}
-        ${ESP8266_SDK_LIB_SSL}
-        ${ESP8266_SDK_LIB_OPENSSL}
-        ${ESP8266_SDK_LIB_MBEDTLS}
-        ${ESP8266_SDK_LIB_MQTT}
-        ${ESP8266_SDK_LIB_WPA}
-        ${ESP8266_SDK_LIB_WPS}
-        ${ESP8266_SDK_LIB_GCC}
-        ${ESP8266_SDK_LIB_CIROM}
-    )
-endfunction(esp8266_add_library)
-
-
 if(NOT PYTHON)
     set(PYTHON python)
 endif()
@@ -238,6 +137,110 @@ else()
     set(BOOT_NAME "eagle.flash.bin")
     set(BIN_NAME "eagle.irom0text.bin")
 endif()
+
+function(esp8266_add_library TARGET)
+#     cmake_parse_arguments(
+#         PARSED_ARGS # prefix of output variables
+#         "" # list of names of the boolean arguments (only defined ones will be true)
+#         "NAME" # list of names of mono-valued arguments
+#         "" # list of names of multi-valued arguments (output variables are lists)
+#         ${ARGN} # arguments of the function to parse, here we take the all original ones
+#     )
+
+    file(GLOB driver_lib
+        "${ESP8266_SDK_BASE}/driver_lib/driver/*.c"
+    )
+    add_library(${TARGET} STATIC ${driver_lib} ${ARGN})
+    target_compile_definitions(${TARGET}    ESP_SYS_PARAM_ADDR=${ESP_SYS_PARAM_ADDR}
+                                            ESP_RF_CAL_ADDR=${ESP_RF_CAL_ADDR}
+                                            ESP_DEFAULT_ADDR=${ESP_DEFAULT_ADDR}
+                                            ESP_APP_ADDR=${ADDR})
+    
+#     target_include_directories(${TARGET} PUBLIC
+#         "${ESP8266_SDK_BASE}/include"
+#         "${ESP8266_SDK_BASE}/driver_lib/include"
+#         "${ESP8266_SDK_BASE}/include/json"
+#         "${ESP8266_SDK_BASE}/extra_include"
+#         "${ESP8266_SDK_BASE}/include/espressif"
+#         "${ESP8266_SDK_BASE}/include/lwip"
+#         "${ESP8266_SDK_BASE}/include/lwip/ipv4"
+#         "${ESP8266_SDK_BASE}/include/lwip/ipv6"
+#         "${ESP8266_SDK_BASE}/include/nopoll"
+#         "${ESP8266_SDK_BASE}/include/spiffs"
+#         "${ESP8266_SDK_BASE}/include/ssl"
+#         "${ESP8266_SDK_BASE}/include/json"
+#         "${ESP8266_SDK_BASE}/include/freertos"
+#     )
+    
+#     get_property(dirs TARGET ${TARGET} PROPERTY INCLUDE_DIRECTORIES)
+#     foreach(dir ${dirs})
+#         message(STATUS "dir='${dir}'")
+#     endforeach()
+
+    find_library(ESP8266_ARDUINO_SDK_LIB_HAL hal ${ARDUINO_ESP8266_DIR}/${ARDUINO_ESP8266_VERSION}/tools/sdk/lib)
+    find_library(ESP8266_SDK_LIB_GCC gcc ${ESP8266_SDK_BASE}/lib)
+    find_library(ESP8266_SDK_LIB_CIROM cirom ${ESP8266_SDK_BASE}/lib)
+    find_library(ESP8266_SDK_LIB_CRYPTO crypto ${ESP8266_SDK_BASE}/lib)
+    find_library(ESP8266_SDK_LIB_ESPCONN espconn ${ESP8266_SDK_BASE}/lib)
+    find_library(ESP8266_SDK_LIB_MIROM mirom ${ESP8266_SDK_BASE}/lib)
+    find_library(ESP8266_SDK_LIB_ESPNOW espnow ${ESP8266_SDK_BASE}/lib)
+    find_library(ESP8266_SDK_LIB_FREERTOS freertos ${ESP8266_SDK_BASE}/lib)
+    find_library(ESP8266_SDK_LIB_JSON json ${ESP8266_SDK_BASE}/lib)
+    find_library(ESP8266_SDK_LIB_LWIP lwip ${ESP8266_SDK_BASE}/lib)
+    find_library(ESP8266_SDK_LIB_MAIN main ${ESP8266_SDK_BASE}/lib)
+    find_library(ESP8266_SDK_LIB_MESH mesh ${ESP8266_SDK_BASE}/lib)
+    find_library(ESP8266_SDK_LIB_MINIC minic ${ESP8266_SDK_BASE}/lib)
+    find_library(ESP8266_SDK_LIB_NET80211 net80211 ${ESP8266_SDK_BASE}/lib)
+    find_library(ESP8266_SDK_LIB_NOPOLL nopoll ${ESP8266_SDK_BASE}/lib)
+    find_library(ESP8266_SDK_LIB_PHY phy ${ESP8266_SDK_BASE}/lib)
+    find_library(ESP8266_SDK_LIB_PP pp ${ESP8266_SDK_BASE}/lib)
+    find_library(ESP8266_SDK_LIB_PWM pwm ${ESP8266_SDK_BASE}/lib)
+    find_library(ESP8266_SDK_LIB_UPGRADE upgrade ${ESP8266_SDK_BASE}/lib)
+    find_library(ESP8266_SDK_LIB_SMARTCONFIG smartconfig ${ESP8266_SDK_BASE}/lib)
+    find_library(ESP8266_SDK_LIB_AIRKISS airkiss ${ESP8266_SDK_BASE}/lib)
+    find_library(ESP8266_SDK_LIB_SPIFFS spiffs ${ESP8266_SDK_BASE}/lib)
+    find_library(ESP8266_SDK_LIB_SSC ssc ${ESP8266_SDK_BASE}/lib)
+    find_library(ESP8266_SDK_LIB_SSL ssl ${ESP8266_SDK_BASE}/lib)
+    find_library(ESP8266_SDK_LIB_OPENSSL openssl ${ESP8266_SDK_BASE}/lib)
+    find_library(ESP8266_SDK_LIB_MBEDTLS mbedtls ${ESP8266_SDK_BASE}/lib)
+    find_library(ESP8266_SDK_LIB_MQTT mqtt ${ESP8266_SDK_BASE}/lib)
+    find_library(ESP8266_SDK_LIB_WPA wpa ${ESP8266_SDK_BASE}/lib)
+    find_library(ESP8266_SDK_LIB_WPS wps ${ESP8266_SDK_BASE}/lib)
+
+    target_link_libraries(${TARGET}
+#         gcc
+        -lhal
+#         ${ESP8266_ARDUINO_SDK_LIB_HAL}
+        ${ESP8266_SDK_LIB_CRYPTO}
+        ${ESP8266_SDK_LIB_ESPCONN}
+        ${ESP8266_SDK_LIB_MIROM}
+        ${ESP8266_SDK_LIB_ESPNOW}
+        ${ESP8266_SDK_LIB_FREERTOS}
+        ${ESP8266_SDK_LIB_JSON}
+        ${ESP8266_SDK_LIB_LWIP}
+        ${ESP8266_SDK_LIB_MAIN}
+#         ${ESP8266_SDK_LIB_MESH}
+        ${ESP8266_SDK_LIB_MINIC}
+        ${ESP8266_SDK_LIB_NET80211}
+        ${ESP8266_SDK_LIB_NOPOLL}
+        ${ESP8266_SDK_LIB_PHY}
+        ${ESP8266_SDK_LIB_PP}
+        ${ESP8266_SDK_LIB_PWM}
+#         ${ESP8266_SDK_LIB_UPGRADE}
+        ${ESP8266_SDK_LIB_SMARTCONFIG}
+        ${ESP8266_SDK_LIB_AIRKISS}
+        ${ESP8266_SDK_LIB_SPIFFS}
+        ${ESP8266_SDK_LIB_SSC}
+        ${ESP8266_SDK_LIB_SSL}
+        ${ESP8266_SDK_LIB_OPENSSL}
+        ${ESP8266_SDK_LIB_MBEDTLS}
+        ${ESP8266_SDK_LIB_MQTT}
+        ${ESP8266_SDK_LIB_WPA}
+        ${ESP8266_SDK_LIB_WPS}
+        ${ESP8266_SDK_LIB_GCC}
+        ${ESP8266_SDK_LIB_CIROM}
+    )
+endfunction(esp8266_add_library)
 
 function(esp8266_add_executable TARGET)
     add_executable(${TARGET} "")
