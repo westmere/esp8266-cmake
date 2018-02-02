@@ -317,7 +317,7 @@ if (_SDK_INCLUE_PROCESSED)
     return()
 endif ()
 include_directories(${TARGET}
-#     "${ESP8266_SDK_BASE}/include"
+    "${ESP8266_SDK_BASE}/include"
     "${ESP8266_SDK_BASE}/driver_lib/include"
     "${ESP8266_SDK_BASE}/include/json"
     "${ESP8266_SDK_BASE}/extra_include"
