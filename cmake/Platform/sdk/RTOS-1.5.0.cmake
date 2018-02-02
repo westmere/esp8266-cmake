@@ -142,21 +142,21 @@ function(esp8266_add_library TARGET)
     )
     add_library(${TARGET} STATIC ${driver_lib} ${ARGN})
     
-    target_include_directories(${TARGET} PRIVATE
-        "${ESP8266_SDK_BASE}/include"
-        "${ESP8266_SDK_BASE}/driver_lib/include"
-        "${ESP8266_SDK_BASE}/include/json"
-        "${ESP8266_SDK_BASE}/extra_include"
-        "${ESP8266_SDK_BASE}/include/espressif"
-        "${ESP8266_SDK_BASE}/include/lwip"
-        "${ESP8266_SDK_BASE}/include/lwip/ipv4"
-        "${ESP8266_SDK_BASE}/include/lwip/ipv6"
-        "${ESP8266_SDK_BASE}/include/nopoll"
-        "${ESP8266_SDK_BASE}/include/spiffs"
-        "${ESP8266_SDK_BASE}/include/ssl"
-        "${ESP8266_SDK_BASE}/include/json"
-        "${ESP8266_SDK_BASE}/include/freertos"
-    )
+#     target_include_directories(${TARGET} PUBLIC
+#         "${ESP8266_SDK_BASE}/include"
+#         "${ESP8266_SDK_BASE}/driver_lib/include"
+#         "${ESP8266_SDK_BASE}/include/json"
+#         "${ESP8266_SDK_BASE}/extra_include"
+#         "${ESP8266_SDK_BASE}/include/espressif"
+#         "${ESP8266_SDK_BASE}/include/lwip"
+#         "${ESP8266_SDK_BASE}/include/lwip/ipv4"
+#         "${ESP8266_SDK_BASE}/include/lwip/ipv6"
+#         "${ESP8266_SDK_BASE}/include/nopoll"
+#         "${ESP8266_SDK_BASE}/include/spiffs"
+#         "${ESP8266_SDK_BASE}/include/ssl"
+#         "${ESP8266_SDK_BASE}/include/json"
+#         "${ESP8266_SDK_BASE}/include/freertos"
+#     )
     
 #     get_property(dirs TARGET ${TARGET} PROPERTY INCLUDE_DIRECTORIES)
 #     foreach(dir ${dirs})
@@ -317,7 +317,9 @@ if (_SDK_INCLUE_PROCESSED)
     return()
 endif ()
 include_directories(${TARGET}
+    "${ESP8266_SDK_BASE}/include"
     "${ESP8266_SDK_BASE}/driver_lib/include"
+    "${ESP8266_SDK_BASE}/include/json"
     "${ESP8266_SDK_BASE}/extra_include"
     "${ESP8266_SDK_BASE}/include/espressif"
     "${ESP8266_SDK_BASE}/include/lwip"
@@ -325,6 +327,8 @@ include_directories(${TARGET}
     "${ESP8266_SDK_BASE}/include/lwip/ipv6"
     "${ESP8266_SDK_BASE}/include/nopoll"
     "${ESP8266_SDK_BASE}/include/spiffs"
+    "${ESP8266_SDK_BASE}/include/ssl"
+    "${ESP8266_SDK_BASE}/include/json"
     "${ESP8266_SDK_BASE}/include/freertos"
 )
 set(_SDK_INCLUE_PROCESSED True)
