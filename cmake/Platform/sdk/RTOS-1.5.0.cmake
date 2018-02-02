@@ -313,18 +313,18 @@ function(esp8266_add_firmware FIRMWARE TARGET)
     add_dependencies(${FIRMWARE} ${TARGET})
 endfunction()
 
-# if (_SDK_INCLUE_PROCESSED)
-#     return()
-# endif ()
-# include_directories(${TARGET}
-#     "${ESP8266_SDK_BASE}/driver_lib/include"
-#     "${ESP8266_SDK_BASE}/extra_include"
-#     "${ESP8266_SDK_BASE}/include/espressif"
-#     "${ESP8266_SDK_BASE}/include/lwip"
-#     "${ESP8266_SDK_BASE}/include/lwip/ipv4"
-#     "${ESP8266_SDK_BASE}/include/lwip/ipv6"
-#     "${ESP8266_SDK_BASE}/include/nopoll"
-#     "${ESP8266_SDK_BASE}/include/spiffs"
-#     "${ESP8266_SDK_BASE}/include/freertos"
-# )
-# set(_SDK_INCLUE_PROCESSED True)
+if (_SDK_INCLUE_PROCESSED)
+    return()
+endif ()
+include_directories(${TARGET}
+    "${ESP8266_SDK_BASE}/driver_lib/include"
+    "${ESP8266_SDK_BASE}/extra_include"
+    "${ESP8266_SDK_BASE}/include/espressif"
+    "${ESP8266_SDK_BASE}/include/lwip"
+    "${ESP8266_SDK_BASE}/include/lwip/ipv4"
+    "${ESP8266_SDK_BASE}/include/lwip/ipv6"
+    "${ESP8266_SDK_BASE}/include/nopoll"
+    "${ESP8266_SDK_BASE}/include/spiffs"
+    "${ESP8266_SDK_BASE}/include/freertos"
+)
+set(_SDK_INCLUE_PROCESSED True)
