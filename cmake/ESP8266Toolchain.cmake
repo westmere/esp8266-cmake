@@ -37,7 +37,7 @@ SET(CMAKE_SIZE ${TOOLCHAIN_PREFIX}/bin/xtensa-lx106-elf-size${TOOL_EXECUTABLE_SU
 SET(CMAKE_DEBUGER ${TOOLCHAIN_PREFIX}/bin/xtensa-lx106-elf-gdb${TOOL_EXECUTABLE_SUFFIX} CACHE INTERNAL "debuger")
 SET(CMAKE_CPPFILT ${TOOLCHAIN_PREFIX}/bin/xtensa-lx106-elf-c++filt${TOOL_EXECUTABLE_SUFFIX} CACHE INTERNAL "C++filt")
 
-SET(CCFLAGS  "-g -Wpointer-arith -Wundef -Werror -Wl,-EL -DICACHE_FLASH -fno-inline-functions -nostdlib -mlongcalls -mtext-section-literals -ffunction-sections -fdata-sections")
+SET(CCFLAGS  "-I${TOOLCHAIN_PREFIX}/xtensa-lx106-elf/include -g -Wpointer-arith -Wundef -Werror -Wl,-EL -DICACHE_FLASH -fno-inline-functions -nostdlib -mlongcalls -mtext-section-literals -ffunction-sections -fdata-sections")
 SET(LDFLAGS "-nostdlib -Wl,--no-check-sections -Wl,-static -Wl,--gc-sections -u call_user_start")
 SET(CMAKE_C_FLAGS "${CCFLAGS}" CACHE INTERNAL "c compiler flags release")
 SET(CMAKE_CXX_FLAGS "${CCFLAGS}" CACHE INTERNAL "cxx compiler flags release")

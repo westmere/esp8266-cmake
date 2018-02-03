@@ -137,6 +137,7 @@ set(ESP8266_RTOS_SDK_INCLUDE
     "${ESP8266_SDK_BASE}/include/lwip"
     "${ESP8266_SDK_BASE}/include/lwip/ipv4"
     "${ESP8266_SDK_BASE}/include/lwip/ipv6"
+    "${ESP8266_SDK_BASE}/include/lwip/posix"
     "${ESP8266_SDK_BASE}/include/nopoll"
     "${ESP8266_SDK_BASE}/include/spiffs"
     "${ESP8266_SDK_BASE}/include/ssl"
