@@ -198,8 +198,9 @@ function(esp8266_add_library TARGET)
 
     target_link_libraries(${TARGET}
 #         gcc
-        -lhal
-#         ${ESP8266_ARDUINO_SDK_LIB_HAL}
+#         -lhal
+        ${ESP8266_SDK_LIB_GCC}
+        ${ESP8266_ARDUINO_SDK_LIB_HAL}
         ${ESP8266_SDK_LIB_CRYPTO}
         ${ESP8266_SDK_LIB_ESPCONN}
         ${ESP8266_SDK_LIB_MIROM}
@@ -209,7 +210,6 @@ function(esp8266_add_library TARGET)
         ${ESP8266_SDK_LIB_LWIP}
         ${ESP8266_SDK_LIB_MAIN}
 #         ${ESP8266_SDK_LIB_MESH}
-        ${ESP8266_SDK_LIB_MINIC}
         ${ESP8266_SDK_LIB_NET80211}
         ${ESP8266_SDK_LIB_NOPOLL}
         ${ESP8266_SDK_LIB_PHY}
@@ -227,7 +227,7 @@ function(esp8266_add_library TARGET)
         ${ESP8266_SDK_LIB_WPA}
         ${ESP8266_SDK_LIB_WPS}
         ${ESP8266_SDK_LIB_CIROM}
-        ${ESP8266_SDK_LIB_GCC}
+        ${ESP8266_SDK_LIB_MINIC}
     )
 endfunction(esp8266_add_library)
 
