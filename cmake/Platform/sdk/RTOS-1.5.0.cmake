@@ -198,8 +198,8 @@ function(esp8266_add_library TARGET)
 
     target_link_libraries(${TARGET}
 #         gcc
-#         -lhal
         ${ESP8266_SDK_LIB_GCC}
+        -lhal
         ${ESP8266_ARDUINO_SDK_LIB_HAL}
         ${ESP8266_SDK_LIB_CRYPTO}
         ${ESP8266_SDK_LIB_ESPCONN}
