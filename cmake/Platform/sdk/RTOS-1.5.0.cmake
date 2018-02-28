@@ -226,8 +226,8 @@ function(esp8266_add_library TARGET)
         ${ESP8266_SDK_LIB_MQTT}
         ${ESP8266_SDK_LIB_WPA}
         ${ESP8266_SDK_LIB_WPS}
-        ${ESP8266_SDK_LIB_GCC}
         ${ESP8266_SDK_LIB_CIROM}
+        ${ESP8266_SDK_LIB_GCC}
     )
 endfunction(esp8266_add_library)
 
