@@ -118,7 +118,7 @@ if(NOT ${BOOT_MODE} STREQUAL 0)
     else()
         set(ADDR ${ESP_APP2_ADDR})
     endif()
-    set(BOOT_NAME "${ESP8266_SDK_BASE}/bin/boot_v1.7.bin")
+    set(BOOT_NAME "boot_v1.7.bin")
     set(BIN_NAME "user${APP}.${flash}.${BOOT_MODE}.${SPI_SIZE_MAP}.bin")
 else()
     set(ESP_APP1_ADDR 0)
@@ -254,6 +254,7 @@ function(esp8266_add_firmware FIRMWARE TARGET)
                         COMMAND rm -f eagle.S eagle.dump
                         COMMAND ${CMAKE_OBJDUMP} -x -s ${TARGET} > eagle.dump
                         COMMAND ${CMAKE_OBJDUMP} -S ${TARGET} > eagle.S
+                        COMMAND ${CMAKE_COMMAND} -E copy ${ESP8266_SDK_BASE}/bin/${BOOT_NAME} ${CMAKE_BINARY_DIR}
                         COMMAND ${CMAKE_OBJCOPY} --only-section .text -O binary ${TARGET} eagle.app.v6.text.bin
                         COMMAND ${CMAKE_OBJCOPY} --only-section .data -O binary ${TARGET} eagle.app.v6.data.bin
                         COMMAND ${CMAKE_OBJCOPY} --only-section .rodata -O binary ${TARGET} eagle.app.v6.rodata.bin
@@ -292,6 +293,9 @@ function(esp8266_add_firmware FIRMWARE TARGET)
         )
     endif()
     
+    file(COPY ${ESP8266_SDK_BASE}/bin/esp_init_data_default.bin ${CMAKE_BINARY_DIR})
+    file(COPY ${ESP8266_SDK_BASE}/bin/blank.bin ${CMAKE_BINARY_DIR})
+    
     file(WRITE "${CMAKE_BINARY_DIR}/temp/esptool.sh"
         "#!/bin/bash\n"
         "if [ \"$1\" ]; then\n"
@@ -306,7 +310,7 @@ function(esp8266_add_firmware FIRMWARE TARGET)
         " fi\n"
         "fi\n"
         "set -x\n"
-        "${PYTHON} ${ESPTOOL} --port $port write_flash 0 ${BOOT_NAME} ${ADDR} ${BIN_NAME} ${ESP_RF_CAL_DEFAULT_ADDR} ${ESP8266_SDK_BASE}/bin/esp_init_data_default.bin ${ESP_RF_CAL_ADDR} ${ESP8266_SDK_BASE}/bin/blank.bin ${ESP_SYS_PARAM_ADDR} ${ESP8266_SDK_BASE}/bin/blank.bin\n"
+        "${PYTHON} ${ESPTOOL} --port $port write_flash 0 ${BOOT_NAME} ${ADDR} ${BIN_NAME} ${ESP_RF_CAL_DEFAULT_ADDR} esp_init_data_default.bin ${ESP_RF_CAL_ADDR} ${ESP8266_SDK_BASE}/bin/blank.bin ${ESP_SYS_PARAM_ADDR} blank.bin\n"
         "set +x\n"
     )
     file(COPY "${CMAKE_BINARY_DIR}/temp/esptool.sh"
