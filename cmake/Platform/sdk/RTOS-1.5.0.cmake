@@ -267,8 +267,8 @@ function(esp8266_add_firmware FIRMWARE TARGET)
                         ALL
                         VERBATIM
                         DEPENDS RTOS_SDK_FIRMWARE0
-                        COMMAND ${CMAKE_COMMAND} -E rename eagle.app.flash.bin ${BOOT_NAME}
-                        COMMAND ${CMAKE_COMMAND} -E rename eagle.app.v6.irom0text.bin ${BIN_NAME}
+                        COMMAND ${CMAKE_COMMAND} -E rename eagle.app.flash.bin ${CMAKE_BINARY_DIR}/firmware/${BOOT_NAME}
+                        COMMAND ${CMAKE_COMMAND} -E rename eagle.app.v6.irom0text.bin ${CMAKE_BINARY_DIR}/firmware/${BIN_NAME}
                         COMMAND ${CMAKE_COMMAND} -E remove eagle.app.v6.*
                         COMMAND @${CMAKE_COMMAND} -E echo "No boot needed."
                         COMMAND @${CMAKE_COMMAND} -E echo "Generate ${BOOT_NAME} and ${BIN_NAME} successully in folder bin."
@@ -285,7 +285,7 @@ function(esp8266_add_firmware FIRMWARE TARGET)
                         ALL
                         VERBATIM
                         DEPENDS RTOS_SDK_FIRMWARE0
-                        COMMAND ${CMAKE_COMMAND} -E rename eagle.app.flash.bin ${BIN_NAME}
+                        COMMAND ${CMAKE_COMMAND} -E rename eagle.app.flash.bin ${CMAKE_BINARY_DIR}/firmware/${BIN_NAME}
                         COMMAND ${CMAKE_COMMAND} -E remove eagle.app.v6.*
                         COMMAND @${CMAKE_COMMAND} -E echo ${msg}
                         COMMAND @${CMAKE_COMMAND} -E echo "${BOOT_NAME}------------>0x00000"
@@ -293,8 +293,8 @@ function(esp8266_add_firmware FIRMWARE TARGET)
         )
     endif()
     
-    file(COPY ${ESP8266_SDK_BASE}/bin/esp_init_data_default.bin DESTINATION ${CMAKE_BINARY_DIR})
-    file(COPY ${ESP8266_SDK_BASE}/bin/blank.bin DESTINATION ${CMAKE_BINARY_DIR})
+    file(COPY ${ESP8266_SDK_BASE}/bin/esp_init_data_default.bin DESTINATION ${CMAKE_BINARY_DIR}/firmware)
+    file(COPY ${ESP8266_SDK_BASE}/bin/blank.bin DESTINATION ${CMAKE_BINARY_DIR}/firmware)
     file(COPY ${ESPTOOL} DESTINATION ${CMAKE_BINARY_DIR})
     
     file(WRITE "${CMAKE_BINARY_DIR}/temp/esptool.sh"
@@ -315,7 +315,7 @@ function(esp8266_add_firmware FIRMWARE TARGET)
         "set +x\n"
     )
     file(COPY "${CMAKE_BINARY_DIR}/temp/esptool.sh"
-        DESTINATION ${CMAKE_BINARY_DIR} 
+        DESTINATION ${CMAKE_BINARY_DIR}/firmware
         FILE_PERMISSIONS OWNER_READ OWNER_EXECUTE
     )
     add_dependencies(${FIRMWARE} ${TARGET})
