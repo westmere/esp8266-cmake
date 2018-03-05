@@ -311,7 +311,7 @@ function(esp8266_add_firmware FIRMWARE TARGET)
         " fi\n"
         "fi\n"
         "set -x\n"
-        "${PYTHON} esptool.py --port $port write_flash 0 ${BOOT_NAME} ${ADDR} ${BIN_NAME} ${ESP_RF_CAL_DEFAULT_ADDR} esp_init_data_default.bin ${ESP_RF_CAL_ADDR} ${ESP8266_SDK_BASE}/bin/blank.bin ${ESP_SYS_PARAM_ADDR} blank.bin\n"
+        "${PYTHON} esptool.py --port $port write_flash 0 ${BOOT_NAME} ${ADDR} ${BIN_NAME} ${ESP_RF_CAL_DEFAULT_ADDR} esp_init_data_default.bin ${ESP_RF_CAL_ADDR} blank.bin ${ESP_SYS_PARAM_ADDR} blank.bin\n"
         "set +x\n"
     )
     file(COPY "${CMAKE_BINARY_DIR}/temp/esptool.sh"
