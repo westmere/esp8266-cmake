@@ -254,7 +254,7 @@ function(esp8266_add_firmware FIRMWARE TARGET)
                         COMMAND rm -f eagle.S eagle.dump
                         COMMAND ${CMAKE_OBJDUMP} -x -s ${TARGET} > eagle.dump
                         COMMAND ${CMAKE_OBJDUMP} -S ${TARGET} > eagle.S
-                        COMMAND ${CMAKE_COMMAND} -E copy ${ESP8266_SDK_BASE}/bin/${BOOT_NAME} ${CMAKE_BINARY_DIR}
+                        COMMAND ${CMAKE_COMMAND} -E copy ${ESP8266_SDK_BASE}/bin/${BOOT_NAME} ${CMAKE_BINARY_DIR}/${BOOT_NAME}
                         COMMAND ${CMAKE_OBJCOPY} --only-section .text -O binary ${TARGET} eagle.app.v6.text.bin
                         COMMAND ${CMAKE_OBJCOPY} --only-section .data -O binary ${TARGET} eagle.app.v6.data.bin
                         COMMAND ${CMAKE_OBJCOPY} --only-section .rodata -O binary ${TARGET} eagle.app.v6.rodata.bin
