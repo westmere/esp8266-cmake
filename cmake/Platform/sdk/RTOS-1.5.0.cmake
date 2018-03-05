@@ -295,7 +295,7 @@ function(esp8266_add_firmware FIRMWARE TARGET)
     
     file(COPY ${ESP8266_SDK_BASE}/bin/esp_init_data_default.bin DESTINATION ${CMAKE_BINARY_DIR}/firmware)
     file(COPY ${ESP8266_SDK_BASE}/bin/blank.bin DESTINATION ${CMAKE_BINARY_DIR}/firmware)
-    file(COPY ${ESPTOOL} DESTINATION ${CMAKE_BINARY_DIR})
+    file(COPY ${ESPTOOL} DESTINATION ${CMAKE_BINARY_DIR}/firmware)
     
     file(WRITE "${CMAKE_BINARY_DIR}/temp/esptool.sh"
         "#!/bin/bash\n"
